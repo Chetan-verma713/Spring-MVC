@@ -7,39 +7,32 @@ import java.util.stream.Collectors;
 
 @Service
 public class TodoService {
-    public static List<Todo> todoList = new ArrayList<>();
-    public static int countTodo = 3;
+    public static List<Todo> todos = new ArrayList<>();
+    public static int noOfTodo = 3;
 
     static {
 
-        todoList.add(new Todo(1, "chetan", "Learn Spring MVC", new Date(), false));
-        todoList.add(new Todo(2, "chetan", "Learn Struts", new Date(), false));
-        todoList.add(new Todo(3, "chetan", "Learn Hibernate", new Date(), false));
+        todos.add(new Todo(1, "chetan", "Learn Spring MVC", new Date(), false));
+        todos.add(new Todo(2, "chetan", "Learn Struts", new Date(), false));
+        todos.add(new Todo(3, "chetan", "Learn Hibernate", new Date(), false));
 
     }
 
     public void addTodo(String name, String desc, Date targetDate, boolean isDone) {
 
-        Todo newTodo = new Todo(++countTodo, name, desc, targetDate, isDone);
+        Todo newTodo = new Todo(++noOfTodo, name, desc, targetDate, isDone);
 
-        todoList.add(newTodo);
+        todos.add(newTodo);
 
     }
 
     public void deleteTodo(int id) {
 
-        Iterator<Todo> iterator = todoList.iterator();
+        List<Todo> filteredList = todos.stream()
+                .filter(todo -> todo.getId() == id)
+                .collect(Collectors.toList());
 
-        while (iterator.hasNext()) {
-            Todo todo = iterator.next();
-            if (todo.getId() == id) {
-                iterator.remove();
-            }
-        }
-
-//        todoList.stream()
-//                .filter(todo -> todo.getId() == id)
-//                .forEach(todoList::remove);
+        todos.removeAll(filteredList);
 
     }
 
@@ -47,7 +40,7 @@ public class TodoService {
 
         List<Todo> filteredTodos = new ArrayList<>();
 
-        todoList.stream()
+        todos.stream()
                 .filter(todo -> Objects.equals(todo.getUser(), user))
                 .forEach(filteredTodos::add);
 
@@ -57,7 +50,7 @@ public class TodoService {
 
     public Todo retrieveTodo(int id) {
 
-        List<Todo> list = todoList.stream()
+        List<Todo> list = todos.stream()
                 .filter(todo -> todo.getId() == id)
                 .collect(Collectors.toList());
 
@@ -67,10 +60,9 @@ public class TodoService {
 
     public void updateTodo(Todo todo) {
 
-        todoList.remove(todo);
-        todoList.add(todo);
+        todos.remove(todo);
+        todos.add(todo);
 
     }
-
 
 }

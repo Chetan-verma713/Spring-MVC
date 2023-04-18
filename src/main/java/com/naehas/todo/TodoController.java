@@ -21,8 +21,7 @@ public class TodoController {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(format,false));
     }
-
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     @ResponseBody
     public String showTodos() {
 
@@ -30,11 +29,10 @@ public class TodoController {
 
         service.retrieveTodos("chetan");
 
-        return TodoService.todoList.toString();
+        return TodoService.todos.toString();
 
     }
-
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping
     @ResponseBody
     public String addTodo(@RequestParam String user, @RequestParam String desc, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date targetDate, @RequestParam(defaultValue = "false") boolean isDone) {
 
@@ -50,8 +48,7 @@ public class TodoController {
         return "success";
 
     }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/{id}")
     @ResponseBody
     public String deleteTodo(@PathVariable int id) {
 
@@ -61,8 +58,7 @@ public class TodoController {
 
         return "success";
     }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     @ResponseBody
     public String retrieveTodo(@PathVariable int id) {
 
@@ -73,9 +69,7 @@ public class TodoController {
         return todo.toString();
 
     }
-
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @PutMapping(value = "/{id}")
     @ResponseBody
     public String updateTodo(@PathVariable int id, @RequestParam(required = false) String user, @RequestParam(required = false) String desc, @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date targetDate, @RequestParam(required = false, defaultValue = "false") boolean isDone) {
 
