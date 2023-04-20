@@ -1,20 +1,46 @@
-package com.naehas.todo;
+package com.naehas.todo.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@Table(name = "TODO",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "info"})}
+)
 public class Todo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false, name = "name")
     private String user;
+    @Column(nullable = false, name = "info")
     private String desc;
+    @Column(nullable = false)
+    @Temporal(value = TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date targetDate;
-    private boolean isDone;
+    @Column(nullable = false, columnDefinition = "BOOLEAN")
+    @JsonProperty
+    private Boolean isDone;
+
+    public Todo() {
+    }
 
     public Todo(int id, String user, String desc, Date targetDate, boolean isDone) {
         this.id = id;
+        this.user = user;
+        this.desc = desc;
+        this.targetDate = targetDate;
+        this.isDone = isDone;
+    }
+
+    public Todo(String user, String desc, Date targetDate, Boolean isDone) {
         this.user = user;
         this.desc = desc;
         this.targetDate = targetDate;
@@ -53,11 +79,11 @@ public class Todo {
         this.targetDate = targetDate;
     }
 
-    public boolean isDone() {
+    public Boolean getDone() {
         return isDone;
     }
 
-    public void setDone(boolean done) {
+    public void setDone(Boolean done) {
         isDone = done;
     }
 
