@@ -30,64 +30,57 @@ public class TodoController {
     @GetMapping
     @ResponseBody
     public ResponseEntity showTodos() {
-
-        System.out.println("list-todo triggered.");
-
-        List<Todo> todos = service.getAllTodos();
-
-        return new ResponseEntity(todos.toString(), HttpStatus.OK);
+        try {
+            List<Todo> todos = service.getAllTodos();
+            return new ResponseEntity(todos.toString(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("failed", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping
     @ResponseBody
     public ResponseEntity addTodo(@RequestBody Todo todo) {
-
-        System.out.println("add-todo triggered.");
-
-        if (todo.getDesc().length() <= 6) {
-            return new ResponseEntity("failed", HttpStatus.BAD_REQUEST);
+        try {
+            service.addTodo(todo);
+            return new ResponseEntity("success", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("failed", HttpStatus.NOT_ACCEPTABLE);
         }
-
-        service.addTodo(todo);
-
-        return new ResponseEntity("success", HttpStatus.OK);
 
     }
 
     @DeleteMapping(value = "/{user}/{desc}")
     @ResponseBody
     public ResponseEntity deleteTodo(@PathVariable String user, @PathVariable String desc) {
-
-        System.out.println("delete-todo triggered.");
-
-        service.deleteTodo(user, desc);
-
-        return new ResponseEntity("success", HttpStatus.OK);
-
+        try {
+            service.deleteTodo(user, desc);
+            return new ResponseEntity("success", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("failed", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping(value = "/{user}")
     @ResponseBody
     public ResponseEntity retrieveTodo(@PathVariable String user) {
-
-        System.out.println("retrieve-todo triggered.");
-
-        List<Todo> todos = service.getTodos(user);
-
-        return new ResponseEntity(todos.toString(), HttpStatus.OK);
-
+        try {
+            List<Todo> todos = service.getTodos(user);
+            return new ResponseEntity(todos.toString(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("failed", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping
     @ResponseBody
     public ResponseEntity updateTodo(@RequestBody Todo todo) {
-
-        System.out.println("update-todo triggered.");
-
-        service.updateTodo(todo);
-
-        return new ResponseEntity("success", HttpStatus.OK);
-
+        try {
+            service.updateTodo(todo);
+            return new ResponseEntity("success", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("failed", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

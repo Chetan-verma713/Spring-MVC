@@ -20,12 +20,15 @@ public class Todo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false, name = "name")
+    @JsonProperty
     private String user;
     @Column(nullable = false, name = "info")
+    @JsonProperty
     private String desc;
     @Column(nullable = false)
     @Temporal(value = TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonProperty
     private Date targetDate;
     @Column(nullable = false, columnDefinition = "BOOLEAN")
     @JsonProperty

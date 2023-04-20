@@ -23,6 +23,10 @@ public class TodoDao {
     }
 
     public void addTodo(Todo todo) {
+        if (todo.getDesc().length() <= 6) {
+            throw new RuntimeException("Description must be more than 6 characters");
+        }
+
         try {
             hibernateTemplate.save(todo);
         } catch (DataIntegrityViolationException e) {
