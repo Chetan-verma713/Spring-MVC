@@ -1,8 +1,8 @@
 package com.naehas.todo.service;
 
 import com.naehas.todo.dao.TodoDao;
-
 import com.naehas.todo.model.Todo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

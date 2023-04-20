@@ -1,6 +1,7 @@
 package com.naehas.todo.dao;
 
 import com.naehas.todo.model.Todo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.orm.hibernate5.HibernateTemplate;

@@ -1,8 +1,10 @@
 package com.naehas.todo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
