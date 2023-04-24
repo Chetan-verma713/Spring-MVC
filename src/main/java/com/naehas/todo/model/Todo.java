@@ -19,7 +19,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "TODO",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "info"})}
+        uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"name", "info"})
+    }
 )
 public class Todo {
     @Id
