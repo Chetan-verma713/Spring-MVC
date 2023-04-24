@@ -2,7 +2,6 @@
 * created by: Chetan Verma
 * role: Associate Software Engineer Trainee as a Java-Backend Developer
 * company: Naehas Software Private Limited
-* info: having fun here
 */
 
 package com.naehas.todo.model;
@@ -20,7 +19,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "TODO",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"name", "info"})}
+        uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"name", "info"})
+    }
 )
 public class Todo {
     @Id
