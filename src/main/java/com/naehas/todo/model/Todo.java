@@ -2,7 +2,6 @@
 * created by: Chetan Verma
 * role: Associate Software Engineer Trainee as a Java-Backend Developer
 * company: Naehas Software Private Limited
-* info: having fun here
 */
 
 package com.naehas.todo.model;
