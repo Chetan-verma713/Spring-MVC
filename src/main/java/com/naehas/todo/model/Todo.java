@@ -1,8 +1,6 @@
 /*
-*
 * created by: Chetan Verma
-*
-* */
+*/
 
 package com.naehas.todo.model;
 
